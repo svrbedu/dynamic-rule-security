@@ -80,3 +80,26 @@ end
 The DRL rule file supports the full Jboss Drools authoring. 
 
 The READ, WRITE, etc... static permissions defined in the net.orangemile.security.acl.Permission class. If you have your own custom ACL permissions, you should add an additional function/static import. The security object is a special utility class that provides useful methods such as setting the object acl. 
+
+= AOP =
+In order to enable rule security, you will need to mark you code with a @secure annotation. 
+
+{{{
+	@Secure(secureResult=true)
+	public Person getPerson() {
+		Person p = new Person();
+		p.setName("jack");
+		return p;
+	}
+}}}
+The value returned by the call getPerson will be run through dynamic security, before returning control to the system. 
+
+{{{
+	@Secure(secureResult=true, secureCall=true)
+	public Person getPerson() {
+		Person p = new Person();
+		p.setName("jack");
+		return p;
+	}
+}}}
+The call to the getPerson will be intercepted. The system will expose a special SecureJoinPoint class to the rule engine, which you can use to test whether the call is allowed. If the call is allowed, the returned result will be run through the dynamic security, before control is returned to the system. 
