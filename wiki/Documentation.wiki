@@ -23,7 +23,8 @@ You will need to add additional spring configuration. Below is a sample that con
 
     <!-- AOP -->
     <aop:aspectj-autoproxy/>
-    
+
+    <!-- Dynamic Rule Security -->    
     <bean id="aclContext" class="net.orangemile.security.acl.ThreadLocalAclContext" />
 
     <bean id="testPermissionResolver" class="net.orangemile.security.TestPermissionResolver" />
@@ -38,6 +39,7 @@ You will need to add additional spring configuration. Below is a sample that con
     	<property name="securityResolver" ref="droolsSecurityResolver" />
     </bean>
 
+    <!-- Domain DAO -->
     <bean id="personDao" class="net.orangemile.security.domain.PersonDaoImpl" />
 
 </beans>
