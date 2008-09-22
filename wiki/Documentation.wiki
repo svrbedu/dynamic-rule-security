@@ -1,8 +1,8 @@
 #summary Documentation
 #labels Featured
-= Documentation =
 The document assumes you are using Spring 2.5 and Drools 4.0. 
 
+= Spring Configuration =
 You will need to add additional spring configuration. Below is a sample that configures the library to use a test permission resolver (always returns "Jack"), and a thread-local acl context. Additionally, the security rules are stored in a file "test.drl" located on the classpath: 
 
 {{{
@@ -42,3 +42,41 @@ You will need to add additional spring configuration. Below is a sample that con
 
 </beans>
 }}}
+
+If you are using Spring Security, you should use the net.orangemile.security.spring.SpringPermissionResolver, otherwise, you will need to write your own. The role of the PermissionResolver is to hide the user security implementation from the rule engine be it Spring Security, or something else. 
+
+As far as the AclContext, the role of that class is to act as a gateway between the rule engine and the system. The rule engine will notify AclContext with ACL changes. The system should look to the AclContext to read the ACL. For example, there maybe a taglib which will read the AclContext to find out how to render a given object. 
+
+The SecurityResolver class is meant as an abstraction of the rule engine. It's plausible that in some cases, the rule engine may not be used. The current implementation only provides the DroolsSecurityResolver, which takes a DRL rule file. 
+
+= Rules =
+The current implementation only supports a single rule file per system. Below is a sample rule file:
+
+{{{
+package net.orangemile.security;
+
+global net.orangemile.security.SecuritySupport security;
+import function net.orangemile.security.acl.Permission.*;
+
+import net.orangemile.security.domain.Person;
+
+rule "Rule 1"
+	# If the persons age is greater than 25, sets read/write acess to username
+	when
+		person : Person(age > 25)
+	then
+		security.setAcl("userName", READ, WRITE );		
+end
+
+rule "Rule 2"
+	# disallows access to a person younger than 15
+	when
+		person : Person(age <15)
+	then
+		retract(person)
+end
+}}}
+
+The DRL rule file supports the full Jboss Drools authoring. 
+
+The READ, WRITE, etc... static permissions defined in the net.orangemile.security.acl.Permission class. If you have your own custom ACL permissions, you should add an additional function/static import. The security object is a special utility class that provides useful methods such as setting the object acl. 
