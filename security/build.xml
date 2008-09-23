@@ -1,0 +1,48 @@
+<project name="orangemile-security" default="jar" basedir=".">
+
+	<!-- properties -->
+	<property name="project.name" value="orangemile-security"/>
+
+	<property name="src.app.java" location="src/app/java"/>
+	<property name="src.app.config" location="src/app/config"/>
+
+	<property name="build.app" location="build/ant-build"/>
+	<property name="dist" location="dist"/>
+	
+	<property name="lib" location="lib"/>
+		
+	<!-- classpath -->
+	<path id="compile.classpath">
+		<fileset dir="${lib}">
+	    	<include name="**/*.jar"/>
+	    </fileset>
+	</path>
+		
+	<!-- clean -->
+	<target name="clean">
+		<delete dir="${build.app}"/>
+	</target>
+	
+	<!-- compile -->
+	<target name="compile" depends="clean">
+		<mkdir dir="${build.app}" />
+		<javac srcdir="${src.app.java}" destdir="${build.app}">
+			<classpath refid="compile.classpath"/>
+		</javac>
+	</target>
+	
+	<!-- jar -->
+	<target name="jar" depends="compile">
+		<mkdir dir="${dist}" />
+		<jar basedir="${build.app}" destfile="${dist}/${project.name}-1.0.0.jar">
+		    <manifest>
+		      	<attribute name="Implementation-Vendor" value="Orange Mile, Inc"/>
+		      	<attribute name="Implementation-Title" value="Dynamic Rule Security"/>
+		      	<attribute name="Implementation-Version" value="1.0.0"/>
+		    </manifest>
+		</jar>
+		
+		<zip basedir="${src.app.java}" destfile="${dist}/${project.name}-1.0.0-src.zip" />
+	</target>
+
+</project>
