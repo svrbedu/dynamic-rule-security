@@ -1,0 +1,15 @@
+package net.orangemile.security;
+
+global net.orangemile.security.SecuritySupport security;
+import function net.orangemile.security.acl.Permission.*;
+
+import net.orangemile.security.domain.Person;
+
+rule "Rule 1"
+	# comment
+	when
+		person : Person()
+	then
+		security.setAcl("userName", READ, WRITE );		
+		// retract( person );
+end
