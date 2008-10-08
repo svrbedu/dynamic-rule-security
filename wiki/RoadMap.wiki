@@ -3,8 +3,8 @@
 
 = Road Map =
 
-1. Taglib support
-2. API for direct instantiation
-3. Cleaner documentation, more samples
-4. Integrate with a web based rule-authoring tool - BRMS System
-5. Seam integration
+   # Taglib support
+   # API for direct instantiation
+   # Cleaner documentation, more samples
+   # Integrate with a web based rule-authoring tool - BRMS System
+   # Seam integration
