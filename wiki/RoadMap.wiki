@@ -1,0 +1,10 @@
+#summary This page describes the road map for this project.
+#labels Phase-Requirements
+
+= Road Map =
+
+1. Taglib support
+2. API for direct instantiation
+3. Cleaner documentation, more samples
+4. Integrate with a web based rule-authoring tool - BRMS System
+5. Seam integration
