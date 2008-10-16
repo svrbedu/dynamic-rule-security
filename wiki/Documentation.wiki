@@ -52,8 +52,6 @@ You will need to add additional spring configuration. Below is a sample that con
     	<property name="securityResolver" ref="droolsSecurityResolver" />
     </bean>
 
-    <bean id="tradeDao" class="net.orangemile.security.test.TradeDao" />
-
 </beans>
 }}}
 
