@@ -144,7 +144,7 @@ An important note is that the IsGrantedTag needs to have the bean "permissionRes
 = Samples =
 A complete sample is available in the orangemile-security-test.war. Just download, and deploy to a webserver. All the source code is available in the main distribution under the testsrc/web/ directory. 
 
-To login, user: *rod*, password: *password*
+To login, user: *rod*  password: *password*
 
 Then navigate to: http://localhost:8080/orangemile-security-test/secure/secure.jsp
 
