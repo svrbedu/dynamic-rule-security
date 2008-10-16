@@ -5,6 +5,7 @@
 
    # ~~Taglib support~~
    # Support for Java Authentication and Authorization Service (JAAS)
+   # Refreshing Rules
    # API for direct instantiation
    # Cleaner documentation, more samples
    # Integrate with a web based rule-authoring tool - BRMS System
