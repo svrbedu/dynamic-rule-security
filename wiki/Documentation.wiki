@@ -140,3 +140,5 @@ You can use the isGranted tag in your JSP's.
 The tag takes the root object on which rule security has already been run, a property of the object that the permissions apply for, and a comma delimited list of permissions. The isGranted tag acts like an if statement, if the permissions are granted, the body will be evaluated/rendered, otherwise, the body will be skipped. 
 
 The string "READ" is resolved to the actual permission mask via the PermissionResolver. Notice that in the spring configuration setup, the permission resolver was initialized with a map of String to int masks. 
+
+An important note is that the IsGrantedTag needs to have the bean "permissionResolver" and "aclContext" defined. 
