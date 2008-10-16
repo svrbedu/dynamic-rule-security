@@ -147,6 +147,8 @@ A complete sample is available in the orangemile-security-test.war. Just downloa
 To login, user: *rod*  password: *password*
 
 Then navigate to: http://localhost:8080/orangemile-security-test/secure/secure.jsp
+(or something similiar depending on your webserver configuration)
+
 
 {{{
 <%@ taglib uri="http://www.orangemile.net/tags/security" prefix="auth" %>
