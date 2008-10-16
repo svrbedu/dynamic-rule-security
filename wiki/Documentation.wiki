@@ -141,4 +141,4 @@ The tag takes the root object on which rule security has already been run, a pro
 
 The string "READ" is resolved to the actual permission mask via the PermissionResolver. Notice that in the spring configuration setup, the permission resolver was initialized with a map of String to int masks. 
 
-An important note is that the IsGrantedTag needs to have the bean "permissionResolver" and "aclContext" defined. 
+An important note is that the IsGrantedTag needs to have the bean "permissionResolver" and "aclContext" defined. This is the current work around due to the limitations of injecting dependencies into JSTL Tags libs. 
