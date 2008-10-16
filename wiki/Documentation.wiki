@@ -89,6 +89,15 @@ rule "Rule 2"
 	then
 		retract(person)
 end
+
+rule "Rule 3"
+	# disallows access to age, if user is not in role SEE_AGE or ADMIN
+	when
+		person : Person()
+                eval( !(security.isUserInRole("SEE_AGE") || security.isUserInRole("ADMIN")) )
+	then
+		security.setAcl("age", NONE );
+end
 }}}
 
 The DRL rule file supports the full Jboss Drools authoring. 
