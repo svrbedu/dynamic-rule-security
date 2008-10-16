@@ -130,6 +130,9 @@ The call to the getPerson will be intercepted. The system will expose a special 
 = JSTL Tags =
 You can use the isGranted tag in your JSP's. 
 {{{
+<%@ taglib uri="http://www.orangemile.net/tags/security" prefix="auth" %>
+}}}
+{{{
 <auth:isGranted object="<%= trade %>" sid="userName" permission="READ">
 	<%= trade.getUserName() %>
 </auth:isGranted>
