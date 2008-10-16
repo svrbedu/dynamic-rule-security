@@ -3,7 +3,7 @@
 The document assumes you are using Spring 2.5 and Drools 4.0. 
 
 = Spring Configuration =
-You will need to add additional spring configuration. Below is a sample that configures the library to use a test permission resolver (always returns "Jack"), and a thread-local acl context. Additionally, the security rules are stored in a file "test.drl" located on the classpath: 
+You will need to add additional spring configuration. Below is a sample that configures the library to use the Spring Security permission resolver, and a thread-local acl context. Additionally, the security rules are stored in a file "security-rules.drl" located on the classpath: 
 
 {{{
 <?xml version="1.0" encoding="UTF-8"?>
@@ -117,3 +117,14 @@ The value returned by the call getPerson will be run through dynamic security, b
 	}
 }}}
 The call to the getPerson will be intercepted. The system will expose a special SecureJoinPoint class to the rule engine, which you can use to test whether the call is allowed. If the call is allowed, the returned result will be run through the dynamic security, before control is returned to the system. 
+
+= JSTL Tags =
+You can use the isGranted tag in your JSP's. 
+{{{
+<auth:isGranted object="<%= trade %>" sid="userName" permission="READ">
+	<%= trade.getUserName() %>
+</auth:isGranted>
+}}}
+The tag takes the root object on which rule security has already been run, a property of the object that the permissions apply for, and of course, a comma delimited list of permissions. The isGranted tag acts like an if statement, if the permissions are granted, the body will be evaluated/rendered, otherwise, the body will be skipped. 
+
+A note about the permission is the resolution of the string "READ" and actual permission mask is done via the PermissionResolver. Notice that in the spring configuration setup, the permission resolver was initialized with a map of String to int mask. 
