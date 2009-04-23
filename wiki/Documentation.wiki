@@ -127,7 +127,7 @@ The call to the getPerson will be intercepted. The system will expose a special 
 
 = Example for Secure Call =
 
-Assuming you call a method call looks like this:
+Assuming your method call looks like this:
 {{{
 	@Secure(secureCall=true)
 	public Person getSecurePerson() {
@@ -148,6 +148,7 @@ rule "Rule 2"
 end
 }}}
 
+Before the call is made, the system checks whether a secureCall flag is set. If it is, it builds a SecureJoinPoint object with various parameters regarding the call. Take a look at the net.orangemile.security.SecureJoinPoint for more details. For how the class is used, take a look at the net.orangemile.security.SecurityAspect class. 
 
 = JSTL Tags =
 You can use the isGranted tag in your JSP's. 
