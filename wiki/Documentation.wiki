@@ -142,6 +142,8 @@ Your rule would look like this:
 rule "Rule 2"
 	when
 		jp : SecureJoinPoint(signatureName == "getSecurePerson")
+		eval( jp.getTarget().getClass().getName().equalsIgnoreCase("net.orangemile.security.domain.PersonDaoImpl") )
+
 	then
 		System.out.println(jp.getSignatureName());
 		retract( jp );				
