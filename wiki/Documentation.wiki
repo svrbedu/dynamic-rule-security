@@ -125,6 +125,30 @@ The value returned by the call getPerson will be run through dynamic security, b
 }}}
 The call to the getPerson will be intercepted. The system will expose a special SecureJoinPoint class to the rule engine, which you can use to test whether the call is allowed. If the call is allowed, the returned result will be run through the dynamic security, before control is returned to the system. 
 
+= Example for Secure Call =
+
+Assuming you call a method call looks like this:
+{{{
+	@Secure(secureCall=true)
+	public Person getSecurePerson() {
+		Person p = new Person();
+		p.setName("secure-call");
+		return p;	
+	}
+}}}
+
+Your rule would look like this: 
+{{{
+rule "Rule 2"
+	when
+		jp : SecureJoinPoint(signatureName == "getSecurePerson")
+	then
+		System.out.println(jp.getSignatureName());
+		retract( jp );				
+end
+}}}
+
+
 = JSTL Tags =
 You can use the isGranted tag in your JSP's. 
 {{{
